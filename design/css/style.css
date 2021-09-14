@@ -11,8 +11,8 @@ body {
     overflow: hidden;
     background-color: #231d5b;
     height: 150px;
-  }
-  
+}
+
 .header-link {
     background-color: #e7288f;
     color: #ede6f2;
@@ -116,9 +116,16 @@ body {
 }
 
 .form-link-divider {
-    height: 100px;
+    height: 50px;
     width: auto;
     display: inline-block;
+}
+
+.piechart {
+    height: 400px;
+    margin-left: 38%;
+    width: 400px;
+    border-radius: 50%;
 }
 
 .footer {

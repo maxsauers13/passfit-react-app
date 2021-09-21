@@ -21,14 +21,6 @@
   <area shape="rect" coords="125,250,300,350" alt="Psychological" href="psychological.php">
 </map>
 
-<!--
-<a class="form-link" href="physical.php">Pysical</a>
-<a class="form-link" href="cognitive.php">Cognitive</a>
-
-<div class="form-link-divider"></div>
-<a class="form-link" href="psychological.php">Psychological</a>
-<div class="form-link-divider"></div>
--->
 <div class="row">
   <div class="form-link-divider"></div>
 </div>

@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'coolvetica';
-    src: url("/fonts/coolvetica/coolvetica\ rg.ttf");
+    src: url("../coolvetica/coolvetica\ rg.ttf");
 }
 
 body {
@@ -137,6 +137,12 @@ body {
 
 .col-75 {
     width: 75%;
+}
+
+/** push footer to the bottom */
+.wrapper {
+    min-height: 60%;
+    margin-bottom: 50px;
 }
 
 @media screen and (max-width: 500px) {

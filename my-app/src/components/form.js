@@ -12,32 +12,39 @@ class Form extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event) {
-        this.setState({answer1: event.target.answer1});
-        this.setState({answer2: event.target.answer2});
-        this.setState({answer3: event.target.answer3});
-        //localStorage.setItem('answer1', event.target.answer1);
-        //localStorage.setItem('answer2', event.target.answer2);
-        //localStorage.setItem('answer3', event.target.answer3);
+    handleChange(event, input) {
+        if (input === 1) {
+            this.setState({answer1: event.target.value});
+        }
+        if (input === 2) {
+            this.setState({answer2: event.target.value});
+        }
+        if (input === 3) {
+            this.setState({answer3: event.target.value});
+        }
     }
 
-    handleSubmit(event) {
-        localStorage.setItem("answer1", this.state.answer1);
-        localStorage.setItem("answer2", this.state.answer2);
-        localStorage.setItem("answer3", this.state.answer3);
-        alert(this.state.answer1);
-        alert(this.state.answer2);
-        alert(this.state.answer3);
+    handleSubmit(event, page) {
+        if (page === "Physical") {
+            localStorage.setItem("physicalTotal", parseInt(this.state.answer1) + parseInt(this.state.answer2) + parseInt(this.state.answer3));
+        }
+        if (page === "Cognitive") {
+            localStorage.setItem("cognitiveTotal", parseInt(this.state.answer1) + parseInt(this.state.answer2) + parseInt(this.state.answer3));
+        }
+        if (page === "Psychological") {
+            localStorage.setItem("psychologicalTotal", parseInt(this.state.answer1) + parseInt(this.state.answer2) + parseInt(this.state.answer3));
+        }
+        localStorage.setItem("totalScore", parseInt(localStorage.getItem("physicalTotal")) + parseInt(localStorage.getItem("cognitiveTotal")) + parseInt(localStorage.getItem("psychologicalTotal")));
     }
 
     render() {
-        return <form onSubmit={this.handleSubmit} class="formpage">
+        return <form onSubmit={(e) => this.handleSubmit(e, this.props.label)} class="formpage">
             <TitleQuestion label="Question 1"></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.answer1} onChange={this.handleChange} placeholder="Answer 1..."/><br/>
+            <input class="text-input" type="text" value={this.state.answer1} onChange={(e) => this.handleChange(e, 1)} placeholder="Answer 1..."/><br/>
             <TitleQuestion label="Question 2"></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.answer2} onChange={this.handleChange} placeholder="Answer 2..."/><br/>
+            <input class="text-input" type="text" value={this.state.answer2} onChange={(e) => this.handleChange(e, 2)} placeholder="Answer 2..."/><br/>
             <TitleQuestion label="Question 3"></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.answer3} onChange={this.handleChange} placeholder="Answer 3..."/><br/>
+            <input class="text-input" type="text" value={this.state.answer3} onChange={(e) => this.handleChange(e, 3)} placeholder="Answer 3..."/><br/>
             <Submit></Submit>
         </form>
     }
@@ -50,11 +57,3 @@ class Submit extends React.Component {
         return <button class="submit-button" type="submit">Submit Form</button>;
     }
 }
-
-/**class Input extends React.Component {
-    render() {
-        return <div class="input">
-        <input class="text-input" type="text" value={this.props.value} onChange={this.handleChange} placeholder={this.props.placeholder}/><br/>
-        </div>
-    }
-}*/

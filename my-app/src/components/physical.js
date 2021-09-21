@@ -6,7 +6,7 @@ class Physical extends React.Component {
     render() {
         return <div class="wrapper">
         <TitleForm label="Physical"></TitleForm>
-        <Form></Form>
+        <Form label="Physical"></Form>
         </div>;
     }
 }

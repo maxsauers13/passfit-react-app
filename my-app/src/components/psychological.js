@@ -6,7 +6,7 @@ class Psychological extends React.Component {
     render() {
         return <div class="wrapper">
         <TitleForm label="Psychological"></TitleForm>
-        <Form></Form>
+        <Form label="Psychological"></Form>
         </div>;
     }
 }

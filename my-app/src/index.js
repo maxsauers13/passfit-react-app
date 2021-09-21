@@ -7,7 +7,7 @@ import Physical from "./components/physical";
 import Cognitive from "./components/cognitive";
 import Psychological from "./components/psychological";
 import Login from "./components/login";
-import About from "./components/about";
+import Results from "./components/results";
 import Home from "./components/home";
 import './css/style.css';
 
@@ -21,7 +21,7 @@ const App = () => (
                 <Route path="/cognitive" exact component={() => <Cognitive />} />
                 <Route path="/psychological" exact component={() => <Psychological />} />
                 <Route path="/login" exact component={() => <Login />} />
-                <Route path="/about" exact component={() => <About />} />
+                <Route path="/results" exact component={() => <Results />} />
             </Switch>
             <Footer />
         </Router>

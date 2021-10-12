@@ -35,6 +35,8 @@ class Form extends React.Component {
             localStorage.setItem("psychologicalTotal", parseInt(this.state.answer1) + parseInt(this.state.answer2) + parseInt(this.state.answer3));
         }
         localStorage.setItem("totalScore", parseInt(localStorage.getItem("physicalTotal")) + parseInt(localStorage.getItem("cognitiveTotal")) + parseInt(localStorage.getItem("psychologicalTotal")));
+        window.open("/");
+        window.close();
     }
 
     render() {

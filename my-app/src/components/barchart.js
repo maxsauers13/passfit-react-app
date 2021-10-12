@@ -3,6 +3,14 @@ import CanvasJSReact from '../canvasjs.react';
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 class BarChart extends React.Component {
+    getResult(component) {
+        if (localStorage.getItem(component) == null) {
+            return 0;
+        } else {
+            return parseInt(localStorage.getItem(component));
+        }
+    }
+
     render() {
         const options = {
             animationEnabled: true,
@@ -22,9 +30,9 @@ class BarChart extends React.Component {
 			data: [{
 				type: "column",
 				dataPoints: [
-					{ label: "Physical", y: parseInt(localStorage.getItem("physicalTotal")), color: "#62c1c9" },
-					{ label: "Cognitive", y: parseInt(localStorage.getItem("cognitiveTotal")), color: "#231d5b" },
-					{ label: "Psychological", y: parseInt(localStorage.getItem("psychologicalTotal")), color: "#e7288f" }
+					{ label: "Physical", y: this.getResult("physicalTotal"), color: "#62c1c9" },
+					{ label: "Cognitive", y: this.getResult("cognitiveTotal"), color: "#231d5b" },
+					{ label: "Psychological", y: this.getResult("psychologicalTotal"), color: "#e7288f" }
 				]
 			}]
         }

@@ -23,8 +23,6 @@ class HeaderRight extends React.Component {
         return <div class="header-right">
             <HeaderLink label="Home" pathname="/"></HeaderLink>
             <HeaderDivider></HeaderDivider>
-            <HeaderLink label="Login" pathname="/login"></HeaderLink>
-            <HeaderDivider></HeaderDivider>
             <HeaderLink label="Results" pathname="/results"></HeaderLink>
         </div>;
     }

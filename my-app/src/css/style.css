@@ -49,6 +49,11 @@ body {
     border-radius: 25%;
 }
 
+.slst-img {
+    margin-left: 40%;
+    width: 20%;
+}
+
 .title {
     font-family: 'coolvetica';
     font-size: 70px;
@@ -66,6 +71,13 @@ body {
 .title-question {
     font-family: 'coolvetica';
     font-size: 30px;
+    color: #231d5b;
+    text-align: center;
+}
+
+.question-instruction {
+    font-family: 'coolvetica';
+    font-size: 20px;
     color: #231d5b;
     text-align: center;
 }
@@ -149,6 +161,8 @@ body {
 .wrapper {
     min-height: 60%;
     margin-bottom: 50px;
+    width: 90%;
+    margin-left: 5%;
 }
 
 @media screen and (max-width: 500px) {

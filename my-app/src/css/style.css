@@ -76,10 +76,17 @@ body {
 }
 
 .question-instruction {
+    margin-left: 15%;
+    width: 70%;
     font-family: 'coolvetica';
     font-size: 20px;
     color: #231d5b;
     text-align: center;
+}
+
+.video-instruction {
+    margin-left: 40%;
+    width: 20%;
 }
 
 .text-input {
@@ -161,8 +168,8 @@ body {
 .wrapper {
     min-height: 60%;
     margin-bottom: 50px;
-    width: 90%;
-    margin-left: 5%;
+    width: 80%;
+    margin-left: 10%;
 }
 
 @media screen and (max-width: 500px) {

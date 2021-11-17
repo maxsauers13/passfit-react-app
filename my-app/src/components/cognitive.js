@@ -81,7 +81,13 @@ class CognitiveForm extends React.Component {
     }
 
     handleSubmit(event) {
-        if (parseFloat(this.state.memory) >= 6) {
+        // handle multiple choice questions that aren't changed
+        var memory = 1;
+        if (this.state.memory !== undefined) {
+            memory = parseFloat(this.state.memory);
+        }
+
+        if (memory >= 6) {
             localStorage.setItem("fof_flag", 1);
         } else {
             localStorage.setItem("fof_flag", 0);
@@ -106,48 +112,135 @@ class CognitiveForm extends React.Component {
         localStorage.setItem("totalScore", parseInt(localStorage.getItem("physicalTotal")) + parseInt(localStorage.getItem("cognitiveTotal")) + parseInt(localStorage.getItem("psychologicalTotal")));
         
         window.open("/");
-        //window.close();
+        window.close();
     }
 
     render() {
         return <form onSubmit={(e) => this.handleSubmit(e)} class="formpage">
             <TitleQuestion label="1. On a scale from 1 to 7, how would you rate your memory in terms of the kinds of problems you have?"></TitleQuestion>
             <QuestionInstruction label="1 = no problems, 7 = major problems"></QuestionInstruction>
-            <input class="text-input" type="text" value={this.state.memory} onChange={(e) => this.handleChange(e, 1)} placeholder="Enter memory rating"/><br/>
+            <select class="text-input" id="memory" onChange={(e) => this.handleChange(e, 1)}>
+                <option value=""></option>
+                <option value="1">1 - no problems</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4 - some problems</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7 - major problems</option>
+            </select>
             
-            <TitleQuestion label="For the next 5 questions, please indicate if each situation or feeling described CURRENTLY pertains to you by
-            entering a 1 or 0 (1 = Yes, 0 = No). Select the response that most closely matches your own, remembering that there are no
-            right or wrong answers."></TitleQuestion>
+            <TitleQuestion label="For the next 5 questions, please indicate if each situation or feeling described CURRENTLY pertains to you. 
+            Select the response that most closely matches your own, remembering that there are no right or wrong answers."></TitleQuestion>
+
             <TitleQuestion label="2. Are you basically satisfied?"></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.satisfied} onChange={(e) => this.handleChange(e, 2)} placeholder="1 = Yes, 0 = No"/><br/>
+            <select class="text-input" id="satisfied" onChange={(e) => this.handleChange(e, 2)}>
+                <option value=""></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
             <TitleQuestion label="3. Do you get bored often?"></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.bored} onChange={(e) => this.handleChange(e, 3)} placeholder="1 = Yes, 0 = No"/><br/>
+            <select class="text-input" id="bored" onChange={(e) => this.handleChange(e, 3)}>
+                <option value=""></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+
             <TitleQuestion label="4. Do you often feel helpless?"></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.helpless} onChange={(e) => this.handleChange(e, 4)} placeholder="1 = Yes, 0 = No"/><br/>
+            <select class="text-input" id="helpless" onChange={(e) => this.handleChange(e, 4)}>
+                <option value=""></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
             <TitleQuestion label="5. Do you prefer to stay at home, rather than going out and doing new things?"></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.stayHome} onChange={(e) => this.handleChange(e, 5)} placeholder="1 = Yes, 0 = No"/><br/>
+            <select class="text-input" id="stayHome" onChange={(e) => this.handleChange(e, 5)}>
+                <option value=""></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
             <TitleQuestion label="6. Do you feel worthless the way you are now?"></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.worthless} onChange={(e) => this.handleChange(e, 6)} placeholder="1 = Yes, 0 = No"/><br/>
+            <select class="text-input" id="worthless" onChange={(e) => this.handleChange(e, 6)}>
+                <option value=""></option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
             
-            <TitleQuestion label="For the next 8 questions, please indicate (enter 1, 2, 3, or 4) how often you feel the way each of the statements below is 
+            <TitleQuestion label="For the next 8 questions, please indicate how often you feel the way each of the statements below is 
             descriptive of you. There are no right or wrong answers."></TitleQuestion>
             <QuestionInstruction label="1 = Never, 2 = Rarely, 3 = Sometimes, 4 = Always"></QuestionInstruction>
+
             <TitleQuestion label="7. I lack companionship."></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.companionship} onChange={(e) => this.handleChange(e, 7)} placeholder="1, 2, 3, or 4"/><br/>
+            <select class="text-input" id="companionship" onChange={(e) => this.handleChange(e, 7)}>
+                <option value=""></option>
+                <option value="1">1 - Never</option>
+                <option value="2">2 - Rarely</option>
+                <option value="3">3 - Sometimes</option>
+                <option value="4">4 - Always</option>
+            </select>
+
             <TitleQuestion label="8. There is no one to turn to."></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.turnTo} onChange={(e) => this.handleChange(e, 8)} placeholder="1, 2, 3, or 4"/><br/>
+            <select class="text-input" id="turnTo" onChange={(e) => this.handleChange(e, 8)}>
+                <option value=""></option>
+                <option value="1">1 - Never</option>
+                <option value="2">2 - Rarely</option>
+                <option value="3">3 - Sometimes</option>
+                <option value="4">4 - Always</option>
+            </select>
+
             <TitleQuestion label="9. I am an outgoing person."></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.outgoing} onChange={(e) => this.handleChange(e, 9)} placeholder="1, 2, 3, or 4"/><br/>
+            <select class="text-input" id="outgoing" onChange={(e) => this.handleChange(e, 9)}>
+                <option value=""></option>
+                <option value="1">1 - Never</option>
+                <option value="2">2 - Rarely</option>
+                <option value="3">3 - Sometimes</option>
+                <option value="4">4 - Always</option>
+            </select>
+
             <TitleQuestion label="10. I feel left out."></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.leftOut} onChange={(e) => this.handleChange(e, 10)} placeholder="1, 2, 3, or 4"/><br/>
+            <select class="text-input" id="leftOut" onChange={(e) => this.handleChange(e, 10)}>
+                <option value=""></option>
+                <option value="1">1 - Never</option>
+                <option value="2">2 - Rarely</option>
+                <option value="3">3 - Sometimes</option>
+                <option value="4">4 - Always</option>
+            </select>
+
             <TitleQuestion label="11. I feel isolation from others."></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.isolation} onChange={(e) => this.handleChange(e, 11)} placeholder="1, 2, 3, or 4"/><br/>
+            <select class="text-input" id="isolation" onChange={(e) => this.handleChange(e, 11)}>
+                <option value=""></option>
+                <option value="1">1 - Never</option>
+                <option value="2">2 - Rarely</option>
+                <option value="3">3 - Sometimes</option>
+                <option value="4">4 - Always</option>
+            </select>
+
             <TitleQuestion label="12. I can find companionship when I want it."></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.findCompanionship} onChange={(e) => this.handleChange(e, 12)} placeholder="1, 2, 3, or 4"/><br/>
+            <select class="text-input" id="findCompanionship" onChange={(e) => this.handleChange(e, 12)}>
+                <option value=""></option>
+                <option value="1">1 - Never</option>
+                <option value="2">2 - Rarely</option>
+                <option value="3">3 - Sometimes</option>
+                <option value="4">4 - Always</option>
+            </select>
+
             <TitleQuestion label="13. I am unhappy being so withdrawn."></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.withdrawn} onChange={(e) => this.handleChange(e, 13)} placeholder="1, 2, 3, or 4"/><br/>
+            <select class="text-input" id="withdrawn" onChange={(e) => this.handleChange(e, 13)}>
+                <option value=""></option>
+                <option value="1">1 - Never</option>
+                <option value="2">2 - Rarely</option>
+                <option value="3">3 - Sometimes</option>
+                <option value="4">4 - Always</option>
+            </select>
+
             <TitleQuestion label="14. People are around me but not with me."></TitleQuestion>
-            <input class="text-input" type="text" value={this.state.aroundNotWith} onChange={(e) => this.handleChange(e, 14)} placeholder="1, 2, 3, or 4"/><br/>
+            <select class="text-input" id="aroundNotWith" onChange={(e) => this.handleChange(e, 14)}>
+                <option value=""></option>
+                <option value="1">1 - Never</option>
+                <option value="2">2 - Rarely</option>
+                <option value="3">3 - Sometimes</option>
+                <option value="4">4 - Always</option>
+            </select>
             
             <Submit></Submit>
         </form>

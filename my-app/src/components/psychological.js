@@ -1,6 +1,7 @@
 import React from 'react';
 import TitleForm from './titleform';
 import TitleQuestion from './titlequestion';
+import PassfitDataService from '../services/passfit.service';
 
 class Psychological extends React.Component {
     render() {
@@ -101,8 +102,45 @@ class PsychologicalForm extends React.Component {
         localStorage.setItem("psychologicalTotal", total);
         localStorage.setItem("totalScore", parseInt(localStorage.getItem("physicalTotal")) + parseInt(localStorage.getItem("cognitiveTotal")) + parseInt(localStorage.getItem("psychologicalTotal")));
         
+        // send result to the database
+        this.saveResults();
+
         window.open("/");
         window.close();
+    }
+
+    saveResults() {
+        var data = {
+            title: "Physical",
+            description: "crf_flag: " + localStorage.getItem("crf_flag") + " slst_flag: " + localStorage.getItem("slst_flag") + " physicalTotal: " + localStorage.getItem("physicalTotal"),
+            published: true,
+            createdAt: "2000-10-13 00-00-00",
+            updatedAt: "2000-10-13 00-00-00"     
+        }
+
+        return PassfitDataService.create(data);
+        // .then(response => {
+        //     this.setState({
+        //         id: response.data.id,
+        //         title: response.data.title,
+        //         description: response.data.description,
+        //         published: response.data.published,
+        //         submitted: true
+        //     });
+        //     return response.data;
+        // }).catch(e => {
+        //     alert(e);
+        // });
+
+        // fetch('http://localhost:8081/passfits', {
+        //     method: 'POST',
+        //     body: data
+        // })
+        // .then(function(response) {
+        //     return response.json()
+        // }).then(function(body) {
+        //     console.log(body);
+        // });
     }
 
     render() {

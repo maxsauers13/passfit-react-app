@@ -3,6 +3,7 @@ import TitleForm from './titleform';
 import TitleQuestion from './titlequestion';
 import slst_img from '../img/slst.jpg';
 import rhrTimer from '../video/rhrTimer.mp4';
+import PassfitDataService from '../services/passfit.service';
 
 class Physical extends React.Component {
     render() {
@@ -59,16 +60,6 @@ class PhysicalForm extends React.Component {
         var height_cm = this.state.height_inch * 2.54;
         var bmi = ((weight_kgs / height_cm) / height_cm) * 10000;
         var srpa_values = [0, 0.32, 1.06, 1.76, 3.03];
-
-        // handle the case where the multiple choice questions are not changed
-        // var gender = 1;
-        // if (this.state.gender !== undefined) {
-        //     gender = parseFloat(this.state.gender);
-        // }
-        // var srpa = 1;
-        // if (this.state.srpa !== undefined) {
-        //     srpa = parseFloat(this.state.srpa);
-        // }
         
         var crf = (parseFloat(this.state.gender) * 2.77) - (parseFloat(this.state.age) * 0.1) - (parseFloat(bmi) * 0.17) - (parseFloat(this.state.rhr) * 0.03) + parseFloat(srpa_values[parseFloat(this.state.srpa) - 1]) + 18.07;
 
@@ -89,8 +80,45 @@ class PhysicalForm extends React.Component {
         localStorage.setItem("physicalTotal", total);
         localStorage.setItem("totalScore", parseInt(localStorage.getItem("physicalTotal")) + parseInt(localStorage.getItem("cognitiveTotal")) + parseInt(localStorage.getItem("psychologicalTotal")));
         
+        // send result to the database
+        this.saveResults();
+
         window.open("/");
         window.close();
+    }
+
+    saveResults() {
+        var data = {
+            title: "Physical",
+            description: "crf_flag: " + localStorage.getItem("crf_flag") + " slst_flag: " + localStorage.getItem("slst_flag") + " physicalTotal: " + localStorage.getItem("physicalTotal"),
+            published: true,
+            createdAt: "2000-10-13 00-00-00",
+            updatedAt: "2000-10-13 00-00-00"     
+        }
+
+        return PassfitDataService.create(data);
+        // .then(response => {
+        //     this.setState({
+        //         id: response.data.id,
+        //         title: response.data.title,
+        //         description: response.data.description,
+        //         published: response.data.published,
+        //         submitted: true
+        //     });
+        //     return response.data;
+        // }).catch(e => {
+        //     alert(e);
+        // });
+
+        // fetch('http://localhost:8081/passfits', {
+        //     method: 'POST',
+        //     body: data
+        // })
+        // .then(function(response) {
+        //     return response.json()
+        // }).then(function(body) {
+        //     console.log(body);
+        // });
     }
 
     render() {

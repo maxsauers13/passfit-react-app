@@ -1,6 +1,7 @@
 import React from 'react';
 import TitleForm from './titleform';
 import TitleQuestion from './titlequestion';
+import PassfitDataService from '../services/passfit.service';
 
 class Cognitive extends React.Component {
     render() {
@@ -111,8 +112,22 @@ class CognitiveForm extends React.Component {
         localStorage.setItem("cognitiveTotal", total);
         localStorage.setItem("totalScore", parseInt(localStorage.getItem("physicalTotal")) + parseInt(localStorage.getItem("cognitiveTotal")) + parseInt(localStorage.getItem("psychologicalTotal")));
         
+        this.saveResults();
+
         window.open("/");
         window.close();
+    }
+
+    saveResults() {
+        var data = {
+            title: "Cognitive",
+            description: "fof_flag: " + localStorage.getItem("fof_flag") + " gds_flag: " + localStorage.getItem("gds_flag") + " ucla_flag: " + localStorage.getItem("ucla_flag") + " cognitiveTotal: " + localStorage.getItem("cognitiveTotal"),
+            published: true,
+            createdAt: "2000-10-13 00-00-00",
+            updatedAt: "2000-10-13 00-00-00"     
+        }
+        window.alert("save");
+        return PassfitDataService.create(data);
     }
 
     render() {
